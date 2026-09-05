@@ -1,0 +1,33 @@
+# --- Flask UI layer ---
+flask>=3.0,<4.0
+
+# --- FastAPI backend layer ---
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.29,<1.0
+pydantic>=2.6,<3.0
+
+# --- ML pipeline (models/) ---
+pandas>=2.0
+numpy==2.4.6
+scikit-learn==1.9.0
+sentence-transformers>=3.0
+faiss-cpu>=1.8
+beautifulsoup4>=4.12
+shap>=0.44
+joblib>=1.3
+
+# Required at inference time for RNN/LSTM models
+keras>=2.15
+tensorflow>=2.15; sys_platform != "darwin" or platform_machine != "arm64"
+tensorflow-macos>=2.15; sys_platform == "darwin" and platform_machine == "arm64"
+
+# --- Training-only extras ---
+pyod>=1.1
+
+# --- AI agent (Groq LLM) + document upload ---
+requests>=2.31
+python-dotenv>=1.0
+pypdf>=4.0
+python-docx>=1.1
+openpyxl>=3.1
+python-multipart>=0.0.9

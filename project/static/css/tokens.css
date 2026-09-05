@@ -1,0 +1,99 @@
+/*
+  Design tokens for the predictive maintenance dashboard.
+
+  Derived from the uploaded reference image: near-black industrial
+  control-room palette, function-driven accent colors (no decorative
+  gradients), border-based cards rather than heavy shadows, and a
+  monospace face reserved for telemetry values to reinforce the
+  "engineering instrument" feel rather than a generic SaaS look.
+*/
+:root {
+  /* --- Surfaces --- */
+  --bg-app: #0a0e17;
+  --bg-sidebar: #0d1220;
+  --bg-panel: #131a29;
+  --bg-panel-raised: #161e30;
+  --bg-panel-alt: #0f1522;
+  --bg-hover: #1a2438;
+  --bg-input: #0d1420;
+
+  --border-color: #212b40;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-strong: #2c3850;
+
+  /* --- Text --- */
+  --text-primary: #e9edf5;
+  --text-secondary: #8b95a8;
+  --text-tertiary: #5c6579;
+  --text-disabled: #414a5e;
+
+  /* --- Functional accent colors --- */
+  --accent-blue: #4f9eff;
+  --accent-blue-soft: rgba(79, 158, 255, 0.14);
+  --accent-cyan: #22d3ee;
+  --accent-cyan-soft: rgba(34, 211, 238, 0.14);
+
+  --status-healthy: #22c55e;
+  --status-healthy-soft: rgba(34, 197, 94, 0.14);
+  --status-warning: #f5a524;
+  --status-warning-soft: rgba(245, 165, 36, 0.14);
+  --status-degrading: #fb7c3c;
+  --status-degrading-soft: rgba(251, 124, 60, 0.14);
+  --status-critical: #f0454b;
+  --status-critical-soft: rgba(240, 69, 75, 0.15);
+
+  --accent-purple: #a78bfa;
+  --accent-purple-soft: rgba(167, 139, 250, 0.14);
+
+  /* --- Typography --- */
+  --font-ui: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Consolas, "Liberation Mono", monospace;
+
+  --fs-2xs: 0.6875rem;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-base: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 1.875rem;
+
+  /* --- Spacing scale --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* --- Radius --- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 999px;
+
+  /* --- Layout --- */
+  --sidebar-width: 232px;
+  --assistant-rail-width: 300px;
+  --topbar-height: 72px;
+
+  /* --- Shadows --- */
+  --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2), 0 12px 28px -14px rgba(0, 0, 0, 0.55);
+  --shadow-card-hover: 0 1px 2px rgba(0, 0, 0, 0.25), 0 20px 40px -16px rgba(0, 0, 0, 0.6);
+
+  /* --- Gradients / glow (used for accents, not full surfaces) --- */
+  --gradient-accent: linear-gradient(135deg, #4f9eff 0%, #22d3ee 100%);
+  --gradient-app-bg:
+    radial-gradient(1100px 620px at 14% -8%, rgba(79, 158, 255, 0.10), transparent 60%),
+    radial-gradient(900px 560px at 100% 0%, rgba(34, 211, 238, 0.07), transparent 55%),
+    radial-gradient(1200px 700px at 50% 115%, rgba(167, 139, 250, 0.06), transparent 60%);
+  --glow-blue: 0 0 0 1px rgba(79, 158, 255, 0.4), 0 0 24px rgba(79, 158, 255, 0.18);
+  --glow-critical: 0 0 0 1px rgba(240, 69, 75, 0.4), 0 0 24px rgba(240, 69, 75, 0.16);
+  --hairline-top: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.10), transparent);
+
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
+  --transition-lift: 180ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{{ app_name }} – {{ app_tagline }}{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tokens.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script>window.API_BASE_URL = {{ api_base_url|tojson }};</script>
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+{% from "partials/_icons.html" import icon %}
+{% set show_rail = show_rail if show_rail is defined else true %}
+<div class="app-shell {{ '' if show_rail else 'app-shell--no-rail' }}">
+  {% include "partials/_sidebar.html" %}
+
+  <div class="main-column">
+    <header class="topbar">
+      <div class="topbar-titles">
+        <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+        <p>{% block page_subtitle %}Real-time monitoring and AI-powered fault prediction{% endblock %}</p>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-chip">{{ icon('calendar', '', 15) }}<span id="topbar-date">&mdash;</span></div>
+        <div class="topbar-chip">{{ icon('clock', '', 15) }}<span id="topbar-time">&mdash;</span></div>
+        {% block topbar_extra_actions %}
+        <button class="btn btn-primary" id="download-report-btn" type="button">{{ icon('download', '', 16) }}<span>Download Report</span></button>
+        {% endblock %}
+      </div>
+    </header>
+
+    <main class="page-content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  {% block assistant_rail %}
+  {% if show_rail %}
+    {% include "partials/_assistant_rail.html" %}
+  {% endif %}
+  {% endblock %}
+</div>
+
+<div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/api.js') }}?v=20260901-2"></script>
+<script src="{{ url_for('static', filename='js/icons.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils.js') }}?v=20260901-2"></script>
+<script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
+<script src="{{ url_for('static', filename='js/charts.js') }}?v=20260901-3"></script>
+
+{% if show_rail %}
+<script src="{{ url_for('static', filename='js/assistant_rail.js') }}"></script>
+{% endif %}
+
+{% block extra_scripts %}{% endblock %}
+
+</body>
+</html>

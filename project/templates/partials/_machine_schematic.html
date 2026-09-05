@@ -1,0 +1,221 @@
+<div class="schematic-wrap schematic-wrap--advanced" id="schematic-wrap">
+  <div class="schematic-legend" aria-hidden="true">
+    <span><i class="schematic-legend-dot legend-healthy"></i>Healthy</span>
+    <span><i class="schematic-legend-dot legend-warning"></i>Warning</span>
+    <span><i class="schematic-legend-dot legend-critical"></i>Critical</span>
+  </div>
+
+  <svg class="schematic-svg schematic-svg--advanced" viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Detailed injection molding machine schematic with nine monitored subsystems">
+    <defs>
+      <linearGradient id="steelBody" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#607084"/><stop offset="0.48" stop-color="#263444"/><stop offset="1" stop-color="#121b27"/>
+      </linearGradient>
+      <linearGradient id="steelLight" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#243345"/><stop offset="0.48" stop-color="#8492a2"/><stop offset="1" stop-color="#263444"/>
+      </linearGradient>
+      <linearGradient id="motorBlue" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#123f72"/><stop offset="0.5" stop-color="#0d75c9"/><stop offset="1" stop-color="#0a2d52"/>
+      </linearGradient>
+      <pattern id="pellets" width="13" height="13" patternUnits="userSpaceOnUse">
+        <circle cx="3" cy="4" r="2.2" fill="#b5bdc8"/><circle cx="10" cy="9" r="2.4" fill="#778493"/>
+      </pattern>
+      <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <marker id="arrowSmall" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 z" fill="var(--text-tertiary)"/>
+      </marker>
+    </defs>
+
+    <!-- section headings -->
+    <g class="machine-section-labels">
+      <text x="350" y="487">INJECTION UNIT</text>
+      <line x1="70" y1="469" x2="665" y2="469"/>
+      <text x="910" y="487">CLAMPING UNIT</text>
+      <line x1="690" y1="469" x2="1150" y2="469"/>
+    </g>
+
+    <!-- machine base / frame -->
+    <g class="machine-neutral">
+      <path d="M55 396 H1142 L1118 438 H85 Z" fill="#101923" stroke="#526274" stroke-width="2"/>
+      <rect x="83" y="438" width="62" height="20" rx="4"/><rect x="1045" y="438" width="62" height="20" rx="4"/>
+      <line x1="126" y1="408" x2="1082" y2="408" stroke="#647487" stroke-width="5"/>
+    </g>
+
+    <!-- motor / gears for screw rotation -->
+    <g class="machine-neutral">
+      <rect x="61" y="270" width="164" height="91" rx="16" fill="url(#motorBlue)" stroke="#4e8ec1" stroke-width="2"/>
+      <rect x="39" y="291" width="35" height="49" rx="8" fill="#293849" stroke="#718196"/>
+      <circle cx="172" cy="315" r="26" fill="#0b1b2a" stroke="#7391aa" stroke-width="3"/>
+      <circle cx="172" cy="315" r="8" fill="#526274"/>
+      <rect x="210" y="286" width="65" height="59" rx="8" fill="url(#steelBody)" stroke="#75869a"/>
+      <circle cx="233" cy="315" r="17" fill="none" stroke="#99a6b6" stroke-width="3"/>
+      <circle cx="255" cy="315" r="12" fill="none" stroke="#99a6b6" stroke-width="3"/>
+    </g>
+
+    <!-- 4 Injection Unit highlight covers motor + barrel carriage -->
+    <g id="schematic-injection" class="schematic-zone status-unknown">
+      <rect class="zone-overlay" x="48" y="260" width="642" height="112" rx="18"/>
+      <path class="zone-stroke" d="M55 373 H676"/>
+    </g>
+
+    <!-- hopper with material pellets -->
+    <g class="machine-neutral">
+      <path d="M254 92 H359 L342 194 H277 Z" fill="url(#steelLight)" stroke="#8c9aaa" stroke-width="2"/>
+      <path d="M266 106 H347 L336 157 H280 Z" fill="url(#pellets)" stroke="#617183"/>
+      <rect x="292" y="194" width="34" height="56" rx="4" fill="url(#steelBody)" stroke="#8291a2"/>
+      <rect x="246" y="80" width="121" height="14" rx="6" fill="#526274" stroke="#8996a6"/>
+    </g>
+    <g id="schematic-hopper" class="schematic-zone status-unknown">
+      <path class="zone-overlay" d="M249 78 H366 L347 199 H332 V255 H286 V199 H271 Z"/>
+    </g>
+
+    <!-- barrel body -->
+    <g class="machine-neutral">
+      <rect x="267" y="257" width="394" height="116" rx="17" fill="url(#steelBody)" stroke="#8493a4" stroke-width="2"/>
+      <rect x="282" y="277" width="360" height="76" rx="24" fill="#111c28" stroke="#566679" stroke-width="2"/>
+      <line x1="280" y1="292" x2="644" y2="292" stroke="#a1adba" stroke-opacity=".26"/>
+      <line x1="280" y1="338" x2="644" y2="338" stroke="#0a111a" stroke-opacity=".9"/>
+    </g>
+
+    <!-- screw -->
+    <g id="schematic-screw" class="schematic-zone status-unknown">
+      <line class="zone-stroke zone-stroke-heavy" x1="278" y1="315" x2="647" y2="315"/>
+      <path class="zone-stroke screw-flight" d="M287 292 L309 339 L331 292 L353 339 L375 292 L397 339 L419 292 L441 339 L463 292 L485 339 L507 292 L529 339 L551 292 L573 339 L595 292 L617 339 L639 297"/>
+    </g>
+
+    <!-- heater bands -->
+    <g class="machine-neutral heater-neutral">
+      <rect x="327" y="249" width="31" height="132" rx="5"/><rect x="392" y="249" width="31" height="132" rx="5"/>
+      <rect x="457" y="249" width="31" height="132" rx="5"/><rect x="522" y="249" width="31" height="132" rx="5"/>
+      <rect x="587" y="249" width="31" height="132" rx="5"/>
+    </g>
+    <g id="schematic-heater" class="schematic-zone status-unknown">
+      <rect class="zone-overlay" x="323" y="245" width="299" height="140" rx="12"/>
+      <path class="zone-stroke" d="M342 250 V378 M407 250 V378 M472 250 V378 M537 250 V378 M602 250 V378"/>
+    </g>
+
+    <!-- non-return valve and nozzle -->
+    <g class="machine-neutral">
+      <path d="M644 290 L675 301 V329 L644 340 Z" fill="url(#steelLight)" stroke="#8493a4" stroke-width="2"/>
+      <path d="M675 303 L710 308 V322 L675 328 Z" fill="#94a1b1" stroke="#c1cad4" stroke-width="1.5"/>
+      <path d="M710 309 L729 313 V317 L710 321 Z" fill="#c3ccd6"/>
+    </g>
+
+    <!-- stationary platen -->
+    <g class="machine-neutral">
+      <rect x="730" y="197" width="35" height="222" rx="5" fill="url(#steelLight)" stroke="#8b99aa" stroke-width="2"/>
+      <rect x="742" y="215" width="11" height="185" rx="3" fill="#111a25" opacity=".55"/>
+    </g>
+
+    <!-- mold halves -->
+    <g class="machine-neutral">
+      <rect x="770" y="229" width="54" height="168" rx="5" fill="#4e5d6e" stroke="#9ba8b7" stroke-width="2"/>
+      <rect x="827" y="229" width="54" height="168" rx="5" fill="#344354" stroke="#8997a7" stroke-width="2"/>
+      <path d="M808 246 C794 267 794 299 808 315 C794 332 794 361 808 380" fill="none" stroke="#d1d7df" stroke-width="3" opacity=".7"/>
+      <path d="M843 246 C857 267 857 299 843 315 C857 332 857 361 843 380" fill="none" stroke="#d1d7df" stroke-width="3" opacity=".7"/>
+    </g>
+    <g id="schematic-mold" class="schematic-zone status-unknown">
+      <rect class="zone-overlay" x="766" y="225" width="119" height="176" rx="9"/>
+      <path class="zone-stroke" d="M825 230 V396"/>
+    </g>
+
+    <!-- cooling passages and hoses -->
+    <g id="schematic-cooling" class="schematic-zone status-unknown">
+      <path class="zone-stroke cooling-line" d="M782 250 C816 258 783 277 815 288 C783 300 816 319 784 333 C816 346 783 365 814 379"/>
+      <path class="zone-stroke cooling-line" d="M866 250 C835 262 867 280 837 292 C868 305 835 323 866 337 C836 349 866 365 840 381"/>
+      <path class="zone-stroke cooling-line" d="M781 251 C750 246 740 234 738 218"/>
+      <path class="zone-stroke cooling-line" d="M867 381 C900 395 910 418 906 443"/>
+    </g>
+
+    <!-- moving platen -->
+    <g class="machine-neutral">
+      <rect x="891" y="190" width="44" height="235" rx="6" fill="url(#steelLight)" stroke="#8b99aa" stroke-width="2"/>
+      <rect x="902" y="213" width="22" height="191" rx="4" fill="#172330" opacity=".62"/>
+    </g>
+
+    <!-- tie rods and clamp frame -->
+    <g class="machine-neutral">
+      <line x1="765" y1="211" x2="1081" y2="211" stroke="#8292a4" stroke-width="10"/>
+      <line x1="765" y1="407" x2="1081" y2="407" stroke="#8292a4" stroke-width="10"/>
+      <line x1="935" y1="250" x2="1048" y2="250" stroke="#526274" stroke-width="8"/>
+      <line x1="935" y1="368" x2="1048" y2="368" stroke="#526274" stroke-width="8"/>
+      <rect x="1040" y="229" width="118" height="160" rx="20" fill="url(#motorBlue)" stroke="#4f89b9" stroke-width="2"/>
+      <rect x="1018" y="245" width="38" height="128" rx="8" fill="url(#steelBody)" stroke="#8391a2"/>
+      <circle cx="1097" cy="309" r="39" fill="#102538" stroke="#72a5ca" stroke-width="3"/>
+      <line x1="1097" y1="270" x2="1097" y2="348" stroke="#507695" stroke-width="3"/>
+    </g>
+    <g id="schematic-clamp" class="schematic-zone status-unknown">
+      <rect class="zone-overlay" x="886" y="185" width="277" height="245" rx="18"/>
+      <path class="zone-stroke" d="M894 211 H1084 M894 407 H1084"/>
+    </g>
+
+    <!-- ejector mechanism behind moving mold -->
+    <g class="machine-neutral">
+      <line x1="882" y1="286" x2="921" y2="286" stroke="#d1d7df" stroke-width="5"/>
+      <line x1="882" y1="309" x2="921" y2="309" stroke="#d1d7df" stroke-width="5"/>
+      <line x1="882" y1="332" x2="921" y2="332" stroke="#d1d7df" stroke-width="5"/>
+      <rect x="908" y="272" width="12" height="75" rx="3" fill="#66778a"/>
+    </g>
+    <g id="schematic-ejector" class="schematic-zone status-unknown">
+      <path class="zone-stroke zone-stroke-heavy" d="M873 286 H921 M873 309 H921 M873 332 H921"/>
+      <circle class="zone-overlay" cx="912" cy="309" r="42"/>
+    </g>
+
+    <!-- hydraulic lines / hydraulic system -->
+    <g class="machine-neutral">
+      <path d="M1114 388 C1124 419 1109 443 1074 443 H224 C181 443 172 420 172 373" fill="none" stroke="#285f88" stroke-width="7"/>
+      <path d="M1131 389 C1142 431 1117 455 1081 455 H205" fill="none" stroke="#163f61" stroke-width="5"/>
+      <rect x="68" y="373" width="167" height="57" rx="10" fill="#1d2e3e" stroke="#526779"/>
+      <circle cx="102" cy="402" r="16" fill="#0d1c29" stroke="#7990a4" stroke-width="2"/>
+      <path d="M93 402 h18 M102 393 v18" stroke="#7698b5" stroke-width="2"/>
+      <rect x="131" y="386" width="80" height="31" rx="6" fill="#172635" stroke="#4a5e72"/>
+    </g>
+    <g id="schematic-hydraulic" class="schematic-zone status-unknown">
+      <path class="zone-stroke hydraulic-highlight" d="M1114 388 C1124 419 1109 443 1074 443 H224 C181 443 172 420 172 373"/>
+      <rect class="zone-overlay" x="62" y="367" width="179" height="69" rx="14"/>
+    </g>
+
+    <!-- engineering labels matching an IMM schematic -->
+    <g class="schematic-engineering-labels">
+      <text x="309" y="46">Feed hopper</text><path d="M309 55 L309 83"/>
+      <text x="454" y="48">Heater bands</text><path d="M454 57 L454 243"/>
+      <text x="529" y="87">Barrel</text><path d="M529 94 L529 245"/>
+      <text x="429" y="420">Reciprocating screw</text><path d="M429 409 L429 349"/>
+      <text x="692" y="270">Nozzle</text><path d="M692 276 L692 308"/>
+      <text x="744" y="165">Stationary platen</text><path d="M744 172 L744 195"/>
+      <text x="824" y="193">Mold</text><path d="M824 199 L824 226"/>
+      <text x="914" y="160">Moving platen</text><path d="M914 168 L914 188"/>
+      <text x="982" y="185">Tie rods</text><path d="M982 192 L982 207"/>
+      <text x="1096" y="188">Clamping cylinder</text><path d="M1096 195 L1096 226"/>
+      <text x="136" y="248">Motor & gears</text><path d="M136 254 L136 270"/>
+      <text x="116" y="463">Hydraulic power / return circuit</text>
+    </g>
+
+    <!-- numbered live subsystem markers -->
+    {% set spots = [
+      ('hopper','1','Hopper',309,135,205,115,102),
+      ('heater','2','Barrel Heater',472,258,424,134,128),
+      ('screw','3','Screw / Plasticizing',519,315,523,154,165),
+      ('injection','4','Injection Unit',192,315,159,187,126),
+      ('hydraulic','5','Hydraulic System',167,401,283,447,143),
+      ('clamp','6','Clamp Unit',1019,211,1045,130,112),
+      ('mold','7','Mold / Tooling',825,251,826,112,128),
+      ('cooling','8','Cooling System',848,358,952,450,132),
+      ('ejector','9','Ejector System',907,309,1018,349,128)
+    ] %}
+    {% for id,num,label,x,y,lx,ly,label_w in spots %}
+    <g class="hotspot status-unknown" data-subsystem="{{ id }}" tabindex="0" role="button" aria-label="{{ label }} subsystem">
+      <line class="hotspot-leader" x1="{{ x }}" y1="{{ y }}" x2="{{ lx }}" y2="{{ ly }}"/>
+      <circle class="hotspot-pulse" cx="{{ x }}" cy="{{ y }}" r="16"/>
+      <circle class="hotspot-number" cx="{{ x }}" cy="{{ y }}" r="13"/>
+      <text class="hotspot-number-text" x="{{ x }}" y="{{ y }}" dy="0.36em">{{ num }}</text>
+      <g class="hotspot-label" transform="translate({{ lx }},{{ ly }})">
+        <rect x="-5" y="-16" width="{{ label_w }}" height="29" rx="8"/>
+        <text x="7" y="3">{{ label }}</text>
+      </g>
+    </g>
+    {% endfor %}
+  </svg>
+  <div class="schematic-tooltip" id="schematic-tooltip" hidden></div>
+</div>

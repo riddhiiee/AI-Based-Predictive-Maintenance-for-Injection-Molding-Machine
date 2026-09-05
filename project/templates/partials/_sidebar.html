@@ -1,0 +1,147 @@
+{% from "partials/_icons.html" import icon %}
+
+<aside class="sidebar">
+
+  <!-- ============================= -->
+  <!-- MoldGuard AI Logo / Branding -->
+  <!-- ============================= -->
+
+  <div class="sidebar-logo">
+
+    <svg
+      class="logo-mark"
+      width="34"
+      height="34"
+      viewBox="0 0 34 34"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M17 1.5 L31 9v16L17 32.5 3 25V9z"
+        fill="var(--accent-blue-soft)"
+        stroke="var(--accent-blue)"
+        stroke-width="1.5"
+      />
+
+      <path
+        d="M11 21V13l6 5 6-5v8"
+        stroke="var(--accent-blue)"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"
+      />
+    </svg>
+
+
+    <div class="sidebar-logo-text">
+
+      <span class="logo-name">
+        {{ app_name }}
+      </span>
+
+      <span class="logo-tagline">
+        {{ app_tagline }}
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- ============================= -->
+  <!-- Main Navigation -->
+  <!-- ============================= -->
+
+  <nav
+    class="sidebar-nav"
+    aria-label="Primary"
+  >
+
+    <!-- Dashboard -->
+
+    <a
+      class="nav-item {{ 'active' if active_page == 'dashboard' }}"
+      href="{{ url_for('dashboard') }}"
+    >
+      {{ icon('grid', 'nav-icon') }}
+
+      <span>
+        Dashboard
+      </span>
+    </a>
+
+
+    <!-- Predictions -->
+
+    <a
+      class="nav-item {{ 'active' if active_page == 'predictions' }}"
+      href="{{ url_for('predictions') }}"
+    >
+      {{ icon('activity', 'nav-icon') }}
+
+      <span>
+        Predictions
+      </span>
+    </a>
+
+
+    <!-- AI Assistant -->
+
+    <a
+      class="nav-item {{ 'active' if active_page == 'assistant' }}"
+      href="{{ url_for('assistant') }}"
+    >
+      {{ icon('message-square', 'nav-icon') }}
+
+      <span>
+        AI Assistant
+      </span>
+    </a>
+
+
+    <!-- History -->
+
+    <a
+      class="nav-item {{ 'active' if active_page == 'history' }}"
+      href="{{ url_for('history') }}"
+    >
+      {{ icon('clock', 'nav-icon') }}
+
+      <span>
+        History
+      </span>
+    </a>
+
+  </nav>
+
+
+  <!-- ============================= -->
+  <!-- Backend Status -->
+  <!-- ============================= -->
+
+  <div class="sidebar-footer">
+
+    <div
+      class="backend-status"
+      id="backend-status"
+    >
+
+      <span
+        class="status-dot-label status-dot-unknown"
+        id="backend-status-label"
+      >
+
+        <span class="status-dot"></span>
+
+        <span>
+          Checking backend&hellip;
+        </span>
+
+      </span>
+
+    </div>
+
+  </div>
+
+</aside>

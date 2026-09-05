@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+{% block title %}
+History | MoldGuard AI
+{% endblock %}
+
+
+{% block content %}
+
+<section class="panel">
+
+  <div class="filter-bar">
+
+    {{ icon('filter', '', 15) }}
+
+    <div class="select-field">
+
+      <label
+        class="visually-hidden"
+        for="history-subsystem"
+      >
+        Subsystem
+      </label>
+
+      <select id="history-subsystem">
+
+        <option value="">
+          All subsystems
+        </option>
+
+        <option value="hopper">
+          Hopper
+        </option>
+
+        <option value="heater">
+          Barrel Heater
+        </option>
+
+        <option value="screw">
+          Screw
+        </option>
+
+        <option value="injection">
+          Injection Unit
+        </option>
+
+        <option value="hydraulic">
+          Hydraulic System
+        </option>
+
+        <option value="clamp">
+          Clamp Unit
+        </option>
+
+        <option value="mold">
+          Mold
+        </option>
+
+        <option value="cooling">
+          Cooling System
+        </option>
+
+        <option value="ejector">
+          Ejector System
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <span
+      class="kpi-sub"
+      id="history-count"
+      style="margin-left:auto;"
+    >
+      —
+    </span>
+
+
+    <a
+      class="btn btn-secondary"
+      href="http://127.0.0.1:8000/history/export.csv"
+      target="_blank"
+      rel="noopener"
+    >
+      Download CSV Report
+    </a>
+
+  </div>
+
+</section>
+
+
+
+<section
+  class="panel"
+  aria-label="Live simulation history"
+>
+
+  <div class="panel-header">
+
+    <div>
+
+      <h2>
+        Live Simulation History
+      </h2>
+
+      <p class="panel-subtitle">
+        Machine-cycle predictions saved from the live simulation
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="table-scroll">
+
+    <table class="data-table">
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Time
+          </th>
+
+          <th>
+            Cycle
+          </th>
+
+          <th>
+            Mold
+          </th>
+
+          <th>
+            Material
+          </th>
+
+          <th>
+            Overall Health
+          </th>
+
+          <th>
+            Subsystem States
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="history-table-body">
+
+        <tr>
+
+          <td colspan="6">
+
+            <div class="loading-row">
+
+              <span class="spinner"></span>
+
+              Loading live history…
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+
+<section class="panel">
+
+  <div class="panel-header">
+
+    <div>
+
+      <h2>
+        History Information
+      </h2>
+
+      <p class="panel-subtitle">
+        How live simulation records are stored and used
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="metric-grid"
+    style="
+      grid-template-columns:
+      repeat(auto-fit, minmax(180px, 1fr));
+    "
+  >
+
+    <article class="metric-card">
+
+      <div class="metric-label">
+        Storage
+      </div>
+
+      <div
+        class="metric-value"
+        style="font-size:1rem;"
+      >
+        JSON Runtime History
+      </div>
+
+      <div class="kpi-sub">
+        Each completed live machine cycle
+        is saved persistently.
+      </div>
+
+    </article>
+
+
+    <article class="metric-card">
+
+      <div class="metric-label">
+        Duplicate Protection
+      </div>
+
+      <div
+        class="metric-value"
+        style="font-size:1rem;"
+      >
+        One Record Per Cycle
+      </div>
+
+      <div class="kpi-sub">
+        Repeated dashboard polling does not
+        create duplicate history entries.
+      </div>
+
+    </article>
+
+
+    <article class="metric-card">
+
+      <div class="metric-label">
+        AI Health Trend
+      </div>
+
+      <div
+        class="metric-value"
+        style="font-size:1rem;"
+      >
+        Live History Based
+      </div>
+
+      <div class="kpi-sub">
+        The dashboard trend is generated
+        using saved simulation cycles.
+      </div>
+
+    </article>
+
+
+    <article class="metric-card">
+
+      <div class="metric-label">
+        Report
+      </div>
+
+      <div
+        class="metric-value"
+        style="font-size:1rem;"
+      >
+        CSV Download
+      </div>
+
+      <div class="kpi-sub">
+        Stored cycle history can be exported
+        as a machine report.
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+{% endblock %}
+
+
+
+{% block extra_scripts %}
+
+<script
+  src="{{ url_for('static', filename='js/history.js') }}"
+></script>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% from "partials/_icons.html" import icon %}
+
+{% block title %}Predictions – {{ app_name }}{% endblock %}
+{% block page_title %}Prediction Results{% endblock %}
+{% block page_subtitle %}Per-subsystem predicted state, confidence, and top contributing features{% endblock %}
+
+{% block content %}
+<section class="panel" aria-label="Cycle selection">
+  <div class="filter-bar">
+    {{ icon('activity', '', 15) }}
+    <select id="prediction-machine-profile" class="machine-profile-select" aria-label="Select mold and material profile"></select>
+    <span class="live-context-chip" id="cycle-meta">Loading cycle details…</span>
+    <span class="live-indicator" style="margin-left:auto;"><span class="status-dot status-healthy"></span><span id="mode-indicator">Simulated Live Feed</span></span>
+  </div>
+</section>
+
+<section class="panel" aria-label="Upload machine data">
+  <div class="panel-header">
+    <h2>Upload Machine Data</h2>
+  </div>
+  <p class="kpi-sub">
+    Run the real trained models against your own cycle data instead of the simulated live feed. Upload a CSV or Excel file with one row per cycle — required columns: <code id="upload-required-cols">mold_name, …</code>.
+  </p>
+  <div style="display:flex; gap: var(--space-2); align-items:center; margin-top: var(--space-2);">
+    <input type="file" id="predict-upload-input" accept=".csv,.xlsx,.xls" class="visually-hidden">
+    <button type="button" class="btn btn-secondary btn-sm" id="predict-upload-btn">{{ icon('upload', '', 15) }} Upload CSV / Excel</button>
+    <button type="button" class="btn btn-sm" id="predict-live-btn" style="display:none;">{{ icon('activity', '', 15) }} Back to Live Feed</button>
+    <span id="predict-upload-status" class="kpi-sub"></span>
+  </div>
+</section>
+
+<section class="grid-subsystems" id="prediction-cards" aria-label="Subsystem predictions">
+  <div class="loading-row"><span class="spinner"></span>Loading predictions…</div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/predictions.js') }}"></script>
+{% endblock %}

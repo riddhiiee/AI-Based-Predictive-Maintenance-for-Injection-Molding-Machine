@@ -1,0 +1,32 @@
+{% from "partials/_icons.html" import icon %}
+<aside class="assistant-rail">
+  <div class="assistant-rail-head">
+    <div class="assistant-rail-title">
+      <span>AI Assistant</span>
+      <span class="pill pill-beta">Beta</span>
+    </div>
+    <a class="icon-btn" href="{{ url_for('assistant') }}" title="Open full assistant">
+      {{ icon('expand', '', 16) }}
+    </a>
+  </div>
+
+  <div class="assistant-mark" aria-hidden="true">
+    {{ icon('network', '', 30) }}
+  </div>
+  <p class="assistant-rail-intro">
+    I continuously analyze machine data in real time to flag anomalies and predict potential failures.
+  </p>
+
+  <div class="assistant-rail-feed" id="assistant-rail-feed" aria-live="polite">
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+  </div>
+
+  <form class="assistant-rail-input" id="assistant-rail-form" autocomplete="off">
+    <input type="text" id="assistant-rail-text" placeholder="Ask AI Assistant…" maxlength="500" aria-label="Ask AI Assistant">
+    <button type="submit" class="icon-btn icon-btn-accent" aria-label="Send">
+      {{ icon('send', '', 16) }}
+    </button>
+  </form>
+</aside>

@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.DS_Store
+*.log
+
+# Real secrets (Grok API key, etc.) -- see .env.example
+.env
+
+# Future model artifacts (see models/README.md)
+models/artifacts/
+
+# Future vector store data (see rag/README.md)
+rag/index/
+rag/*.db
+
+rag/store/*.faiss
+rag/store/chunks.json

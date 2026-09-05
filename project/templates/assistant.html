@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% set show_rail = false %}
+{% from "partials/_icons.html" import icon %}
+
+{% block title %}AI Assistant – {{ app_name }}{% endblock %}
+{% block page_title %}AI Assistant{% endblock %}
+{% block page_subtitle %}Ask why a subsystem is degrading and get an explanation with maintenance guidance{% endblock %}
+
+{% block content %}
+<div class="chat-layout">
+  <div class="chat-main">
+    <div class="panel" style="padding: var(--space-3) var(--space-4);">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="response-section-label">Try asking</div>
+
+        <button
+          type="button"
+          class="btn btn-sm"
+          id="clear-chat-btn">
+          Clear Chat
+        </button>
+      </div>
+      <div class="prompt-chip-row" id="suggested-prompts">
+        <div class="loading-row"><span class="spinner"></span>Loading prompts…</div>
+      </div>
+    </div>
+
+    <div class="panel chat-thread" id="chat-thread">
+      <div class="chat-msg from-ai">
+        <div class="chat-avatar avatar-ai">{{ icon('network', '', 16) }}</div>
+        <div class="chat-bubble">
+          Hi, I'm the machine health assistant. Ask me why a subsystem is at risk, what to inspect first, or how to address an active warning — I'll combine the live model prediction, its SHAP-explained contributing factors, and relevant manual passages into one answer.
+        </div>
+      </div>
+    </div>
+
+    <form class="chat-input-bar" id="chat-form" autocomplete="off">
+      {{ icon('message-square', '', 16) }}
+      <input type="text" id="chat-input" placeholder="Ask about machine health…" maxlength="1000" aria-label="Ask the assistant">
+      <button type="submit" class="btn btn-primary" id="chat-send-btn">{{ icon('send', '', 15) }}<span>Send</span></button>
+    </form>
+  </div>
+
+  <aside class="sources-rail">
+    <h2 style="font-size:var(--fs-md);">Sources &amp; Citations</h2>
+    <p class="panel-subtitle" style="margin-top:-6px;">Manual passages retrieved for your last question, with citations.</p>
+    <div id="sources-list">
+      <p class="empty-note">Ask a question to see retrieved manual references here.</p>
+    </div>
+  </aside>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/assistant.js') }}"></script>
+{% endblock %}

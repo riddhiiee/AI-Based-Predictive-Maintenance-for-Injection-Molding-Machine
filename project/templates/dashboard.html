@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% from "partials/_icons.html" import icon %}
+
+{% block title %}Dashboard – {{ app_name }}{% endblock %}
+{% block page_title %}{{ machine_id }} – Predictive Maintenance{% endblock %}
+{% block page_subtitle %}Real-time monitoring and AI-powered fault prediction{% endblock %}
+
+{% block content %}
+{% set subsystem_defs = [
+  {'id': 'hopper', 'icon': 'box', 'label': 'Hopper / Material Feed'},
+  {'id': 'heater', 'icon': 'flame', 'label': 'Barrel Heater'},
+  {'id': 'screw', 'icon': 'rotate-cw', 'label': 'Screw / Plasticizing'},
+  {'id': 'injection', 'icon': 'activity', 'label': 'Injection Unit'},
+  {'id': 'hydraulic', 'icon': 'droplet', 'label': 'Hydraulic System'},
+  {'id': 'clamp', 'icon': 'clamp', 'label': 'Clamp Unit'},
+  {'id': 'mold', 'icon': 'box', 'label': 'Mold / Tooling'},
+  {'id': 'cooling', 'icon': 'thermometer', 'label': 'Cooling System'},
+  {'id': 'ejector', 'icon': 'arrow-right', 'label': 'Ejector System'}
+] %}
+
+<section class="panel" aria-label="Current job">
+  <div class="filter-bar">
+    {{ icon('activity', '', 15) }}
+    <label class="kpi-sub" for="machine-profile-select">Production profile</label>
+    <select id="machine-profile-select" class="machine-profile-select" aria-label="Select mold and material profile"></select>
+    <span class="kpi-sub" id="cycle-interval-chip"></span>
+    <span class="live-context-chip" id="live-context-chip">Loading current cycle&hellip;</span>
+    <span class="live-indicator" style="margin-left:auto;"><span class="status-dot status-healthy"></span>Live Data</span>
+  </div>
+</section>
+
+<section class="grid-kpi" aria-label="Machine summary">
+  <div class="kpi-card">
+    <div class="gauge-ring">
+      <svg viewBox="0 0 46 46" width="46" height="46">
+        <circle class="gauge-ring-track" cx="23" cy="23" r="19" stroke-width="4"/>
+        <circle id="kpi-health-ring" class="gauge-ring-value" cx="23" cy="23" r="19" stroke-width="4" stroke="var(--status-healthy)" stroke-dasharray="0 120"/>
+      </svg>
+      <span class="gauge-ring-label" id="kpi-health-value">—</span>
+    </div>
+    <div class="kpi-body">
+      <span class="kpi-label">Overall Health</span>
+      <span class="kpi-value" id="kpi-health-status">—</span>
+      <span class="kpi-sub" id="kpi-health-summary">—</span>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon kpi-icon-red">{{ icon('alert-triangle', '', 20) }}</div>
+    <div class="kpi-body">
+      <span class="kpi-label">Active Alerts</span>
+      <span class="kpi-value" id="kpi-alerts-count">—</span>
+      <span class="kpi-sub"><a href="#alerts-panel">View all alerts →</a></span>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon kpi-icon-amber">{{ icon('activity', '', 20) }}</div>
+    <div class="kpi-body">
+      <span class="kpi-label">Predicted Issues</span>
+      <span class="kpi-value" id="kpi-predicted-count">—</span>
+      <span class="kpi-sub" id="kpi-predicted-window">—</span>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon kpi-icon-blue">{{ icon('clock', '', 20) }}</div>
+    <div class="kpi-body">
+      <span class="kpi-label">MTBF</span>
+      <span class="kpi-value" id="kpi-mtbf">—</span>
+      <span class="kpi-sub positive" id="kpi-mtbf-delta">—</span>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon kpi-icon-green">{{ icon('wrench', '', 20) }}</div>
+    <div class="kpi-body">
+      <span class="kpi-label">Last Maintenance</span>
+      <span class="kpi-value" id="kpi-last-maintenance">—</span>
+      <span class="kpi-sub" id="kpi-last-maintenance-date">—</span>
+    </div>
+  </div>
+</section>
+
+<section class="panel" aria-label="Machine overview">
+  <div class="panel-header">
+    <div>
+      <h2>Machine Overview</h2>
+      <p class="panel-subtitle">Hover or tap a marker to inspect a subsystem</p>
+    </div>
+    <span class="live-indicator"><span class="status-dot status-healthy"></span>Live Data</span>
+  </div>
+  {% include "partials/_machine_schematic.html" %}
+</section>
+
+<section class="grid-subsystems" aria-label="Subsystem health">
+  {% for s in subsystem_defs %}
+  <div class="subsystem-card" id="subsystem-{{ s.id }}" data-subsystem="{{ s.id }}">
+    <div class="subsystem-card-head">
+      <div class="subsystem-card-title">{{ icon(s.icon, '', 16) }}<span>{{ s.label }}</span></div>
+      <span class="status-badge" data-field="status-badge">—</span>
+    </div>
+    <div class="subsystem-card-sub">
+      <span class="confidence" data-field="confidence">—</span>
+      <span data-field="trend-icon"></span>
+    </div>
+    <p class="subsystem-diagnostic" data-field="diagnostic">Loading diagnostic…</p>
+    <div class="param-list" data-field="param-list">
+      <div class="loading-row"><span class="spinner"></span>Loading parameters…</div>
+    </div>
+    <div class="sparkline-holder"><canvas data-field="sparkline"></canvas></div>
+  </div>
+  {% endfor %}
+</section>
+
+<section class="grid-2col" aria-label="Maintenance needs and health trend">
+  <div style="display:flex; flex-direction:column; gap: var(--space-3); min-width:0;">
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Predicted Maintenance Needs</h2>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table" id="maintenance-needs-table">
+          <thead>
+            <tr>
+              <th>Component</th><th>Issue</th><th>Severity</th><th>Prediction Window</th><th>Recommendation</th><th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody id="maintenance-needs-body">
+            <tr><td colspan="6">{{ '' }}<div class="loading-row"><span class="spinner"></span>Loading predictions…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" id="alerts-panel">
+      <div class="panel-header">
+        <h2>Recent Alerts</h2>
+      </div>
+      <div class="alert-list" id="alerts-list">
+        <div class="loading-row"><span class="spinner"></span>Loading alerts…</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div>
+        <h2>AI Health Trend</h2>
+      </div>
+      <div class="select-field">
+        <select id="health-trend-range">
+            <option value="20" selected>Last 20 Cycles</option>
+            <option value="50">Last 50 Cycles</option>
+            <option value="100">Last 100 Cycles</option>
+        </select>
+      </div>
+    </div>
+    <div class="chart-panel-body"><canvas id="health-trend-chart"></canvas></div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/schematic.js') }}?v=20260828-7"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}?v=20260905-3"></script>
+{% endblock %}

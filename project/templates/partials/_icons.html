@@ -1,0 +1,90 @@
+{# -----------------------------------------------------------------------
+   Inline SVG icon macro. Usage: {{ icon('flame', 'icon-status-warning', 16) }}
+   Icons use stroke="currentColor" so color is controlled entirely by CSS
+   (set `color` on the wrapping element or pass a utility class).
+----------------------------------------------------------------------- #}
+{% macro icon(name, cls='', size=18) %}
+<svg class="icon {{ cls }}" width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+{%- if name == 'grid' -%}
+  <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+{%- elif name == 'cpu' -%}
+  <rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/>
+{%- elif name == 'activity' -%}
+  <polyline points="2,13 8,13 10,6 14,19 16,11 22,11"/>
+{%- elif name == 'bell' -%}
+  <path d="M6 8a6 6 0 1 1 12 0c0 6 2.5 8 2.5 8h-17S6 14 6 8z"/><path d="M9.7 20a2.3 2.3 0 0 0 4.6 0"/>
+{%- elif name == 'wrench' -%}
+  <path d="M20 6.5a4.5 4.5 0 0 1-5.9 4.28L6 19a2 2 0 1 1-2.9-2.9l8.2-8.1A4.5 4.5 0 1 1 20 6.5z"/>
+{%- elif name == 'file-text' -%}
+  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/>
+{%- elif name == 'settings' -%}
+  <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9.6a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c0 .69.4 1.32 1.51 1.51H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+{%- elif name == 'flame' -%}
+  <path d="M8.5 14.5c0 1.66 1.34 3 3 3s3-1.34 3-3c0-1.1-.4-1.6-.8-2.4-.86-1.7-.18-3.24 1.6-4.8.4 2 1.6 3.92 3.2 5.2 1.6 1.28 2.5 2.8 2.5 4.4a7 7 0 1 1-14 0c0-1.5.6-2.8 1.5-3.8v1.4z"/>
+{%- elif name == 'droplet' -%}
+  <path d="M12 2.7l5.5 6.1a7.5 7.5 0 1 1-11 0z"/>
+{%- elif name == 'rotate-cw' -%}
+  <polyline points="21 4 21 9 16 9"/><path d="M18.4 14.5A9 9 0 1 1 16.2 5L21 9"/>
+{%- elif name == 'clamp' -%}
+  <path d="M7 3v5M17 3v5"/><rect x="4" y="8" width="16" height="4" rx="1"/><path d="M7 12v9M17 12v9"/>
+{%- elif name == 'chevron-down' -%}
+  <polyline points="6 9 12 15 18 9"/>
+{%- elif name == 'chevron-right' -%}
+  <polyline points="9 6 15 12 9 18"/>
+{%- elif name == 'calendar' -%}
+  <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+{%- elif name == 'clock' -%}
+  <circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/>
+{%- elif name == 'download' -%}
+  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+{%- elif name == 'search' -%}
+  <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.2" y2="16.2"/>
+{%- elif name == 'upload' -%}
+  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+{%- elif name == 'send' -%}
+  <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+{%- elif name == 'network' -%}
+  <circle cx="12" cy="5" r="2.3"/><circle cx="5" cy="19" r="2.3"/><circle cx="19" cy="19" r="2.3"/><path d="M12 7.3V13M12 13L6.6 17M12 13l5.4 4"/>
+{%- elif name == 'alert-triangle' -%}
+  <path d="M10.3 3.86L1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.86a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13.5"/><circle cx="12" cy="16.5" r="0.5" fill="currentColor"/>
+{%- elif name == 'check-circle' -%}
+  <circle cx="12" cy="12" r="9"/><polyline points="8 12.5 11 15.5 16 9"/>
+{%- elif name == 'message-square' -%}
+  <path d="M21 14.5a2 2 0 0 1-2 2H8l-4.5 4V5.5a2 2 0 0 1 2-2H19a2 2 0 0 1 2 2z"/>
+{%- elif name == 'book-open' -%}
+  <path d="M2 4h5.5A3.5 3.5 0 0 1 11 7.5v13A3.5 3.5 0 0 0 7.5 17H2z"/><path d="M22 4h-5.5A3.5 3.5 0 0 0 13 7.5v13a3.5 3.5 0 0 1 3.5-3.5H22z"/>
+{%- elif name == 'list' -%}
+  <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="3.5" cy="6" r="1" fill="currentColor"/><circle cx="3.5" cy="12" r="1" fill="currentColor"/><circle cx="3.5" cy="18" r="1" fill="currentColor"/>
+{%- elif name == 'trending-up' -%}
+  <polyline points="2,17 9,10 13,14 22,5"/><polyline points="16 5 22 5 22 11"/>
+{%- elif name == 'trending-down' -%}
+  <polyline points="2,6 9,13 13,9 22,18"/><polyline points="16 18 22 18 22 12"/>
+{%- elif name == 'arrow-up' -%}
+  <line x1="12" y1="19" x2="12" y2="6"/><polyline points="6 11 12 5 18 11"/>
+{%- elif name == 'arrow-down' -%}
+  <line x1="12" y1="5" x2="12" y2="18"/><polyline points="6 13 12 19 18 13"/>
+{%- elif name == 'x' -%}
+  <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+{%- elif name == 'expand' -%}
+  <path d="M17 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h6"/><polyline points="14 3 21 3 21 10"/><line x1="10" y1="14" x2="21" y2="3"/>
+{%- elif name == 'filter' -%}
+  <polygon points="22 3 2 3 10 12.5 10 19 14 21 14 12.5 22 3"/>
+{%- elif name == 'plus' -%}
+  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+{%- elif name == 'lightbulb' -%}
+  <path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/>
+{%- elif name == 'refresh' -%}
+  <polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.5 9A9 9 0 0 0 4.6 5.6L1 10m22 4l-3.6 4.4A9 9 0 0 1 3.5 15"/>
+{%- elif name == 'link' -%}
+  <path d="M9.5 14.5l5-5"/><path d="M7 17l-2 2a3.5 3.5 0 0 1-5-5l4-4a3.5 3.5 0 0 1 5-0" transform="translate(4 -1)"/>
+{%- elif name == 'zap' -%}
+  <polygon points="13 2 3 14 11 14 10 22 21 10 13 10 13 2"/>
+{%- elif name == 'inbox' -%}
+  <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
+{%- elif name == 'shield' -%}
+  <path d="M12 2l8 3.5v6c0 5-3.4 8.6-8 10.5-4.6-1.9-8-5.5-8-10.5v-6z"/>
+{%- else -%}
+  <circle cx="12" cy="12" r="9"/>
+{%- endif -%}
+</svg>
+{% endmacro %}

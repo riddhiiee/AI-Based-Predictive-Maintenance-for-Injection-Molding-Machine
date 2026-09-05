@@ -1,0 +1,16 @@
+{
+  "url_sources": [
+    {
+      "id": "scribd-maintenance",
+      "title": "Maintenance of Plastic Processing Machines",
+      "url": "https://www.scribd.com/document/441583151/maintenance-of-plastic-processing-machines",
+      "note": "Fetched only when publicly accessible; access restrictions are respected."
+    },
+    {
+      "id": "huarong-maintenance",
+      "title": "Huarong Injection Molding Machine Maintenance Article",
+      "url": "https://www.huarong.com.tw/page/news/en/company_news/detail/80",
+      "note": "Public maintenance reference."
+    }
+  ]
+}
